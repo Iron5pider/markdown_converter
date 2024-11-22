@@ -241,4 +241,15 @@ def index():
     return render_template_string(HTML_TEMPLATE, default_text='')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Get local IP address
+    import socket
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
+    
+    print(f"\nServer is running!")
+    print(f"Access locally at: http://127.0.0.1:5000")
+    print(f"Access from other devices at: http://{local_ip}:5000")
+    print("Make sure both devices are on the same network")
+    
+    # Run the server on all network interfaces
+    app.run(host='0.0.0.0', port=5000, debug=True)
